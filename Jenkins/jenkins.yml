@@ -1,0 +1,14 @@
+---
+- hosts: all
+  gather_facts: true
+  become: true
+  
+  roles:
+    - { role: java }
+    - { role: jenkins }
+
+  post_tasks:
+  - name: start jenkins server
+    service: name=jenkins state=started
+    tags:
+      - start_server
